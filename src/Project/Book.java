@@ -5,11 +5,7 @@ import java.time.LocalDate;
 public class Book extends Item {
 private String ISBN,genre,description;
 private Author author;
-/**
- *	1. ISBN (String): The International Standard Book Number uniquely identifies the book.
-	2. genre (String): The genre or category of the book.
-	3. description (String): A brief description or summary of the book
- */
+
 	@Override
 public String toString() {
 	return "Book [ISBN=" + ISBN + ", genre=" + genre + ", description=" + description + "]";
@@ -18,14 +14,6 @@ public String toString() {
 	public String getISBN() {
 	return ISBN;
 }
-
-public Author getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
 
 public void setISBN(String iSBN) {
 	ISBN = iSBN;
