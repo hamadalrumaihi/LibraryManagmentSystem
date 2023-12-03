@@ -43,7 +43,9 @@ public void setDescription(String description) {
 	this.description = description;
 }
 
-	
+	public void addBook() {
+		
+	}
 
 	public static void main(String[] args) {
 	

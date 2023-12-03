@@ -1,8 +1,15 @@
 package Project;
 
 import java.time.LocalDate;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 
-public class Transaction {
+public class Transaction implements Serializable{
+private static final long serialVersionUID = 1L;
 private String transactionId;
 private Customer customer;
 private Item item;
@@ -59,4 +66,36 @@ public Service getService() {
 public void setService(Service service) {
 	this.service = service;
 }
+
+
+public void Borrow() {
+	
 }
+
+public void Return() {
+	
+}
+
+
+public static void saveTransactions(ArrayList<Transaction> transactions, String txtfile) {
+	try (ObjectOutputStream transOutObj = new ObjectOutputStream(new FileOutputStream(txtfile))) {
+		transOutObj.writeObject(transactions);
+		System.out.println("Transactions saved successfully.");
+	} catch (Exception e) {
+		e.getMessage();
+	}
+}
+public static ArrayList<Transaction> loadTransactions(String txtfile) {
+	ArrayList<Transaction> transactions = new ArrayList<>();
+	try (ObjectInputStream transInObj = new ObjectInputStream(new FileInputStream(txtfile))) {
+		Object obj = transInObj.readObject();
+		if (obj instanceof ArrayList) {
+			transactions = (ArrayList<Transaction>) obj;
+			System.out.println("Transactions loaded successfully.");
+		}
+	} catch (Exception e) {
+		e.getMessage();
+	}
+	return transactions;
+}}
+
