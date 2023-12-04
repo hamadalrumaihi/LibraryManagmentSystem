@@ -1,9 +1,19 @@
 package Project;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
 	private Application libraryMenu;
+	public MainMenu() {
+		ArrayList<Item> items = new ArrayList<>();
+		ArrayList<Author> authors = new ArrayList<>();
+		ArrayList<Customer> customers = new ArrayList<>();
+		ArrayList<Service> service = new ArrayList<>();
+		this.libraryMenu = new Application(items, authors, customers, service);
+	}
+
 	public void addNewItem() {
 		Scanner option = new Scanner(System.in);
 
@@ -22,36 +32,114 @@ public class MainMenu {
 			break;
 
 		case 2:
+			addNewScientificJournal();
+			break;
+
+		case 3:
+			addNewMagazine();
+			break;
+		
+		case 4:
+			addNewNewspaper();
+			break;
+			
+			
 		}
 	}
 	public void addNewBook() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner bookIn = new Scanner(System.in);
 
 		System.out.println("Adding a New Book:");
 
 
 		System.out.print("Enter ISBN: ");
-		String isbn = scanner.nextLine();
+		String isbn = bookIn.nextLine();
 
 		System.out.print("Enter genre: ");
-		String genre = scanner.nextLine();
+		String genre = bookIn.nextLine();
 
 		System.out.print("Enter description: ");
-		String description = scanner.nextLine();
+		String description = bookIn.nextLine();
 
 
 		System.out.print("Enter item ID: ");
-		int itemId = scanner.nextInt();
-		scanner.nextLine(); 
+		int itemId = bookIn.nextInt();
+		bookIn.nextLine(); 
 
 		System.out.print("Enter title: ");
-		String title = scanner.nextLine();
-		Author author = new Author();
-		Book book = new Book();
+		String title = bookIn.nextLine();
+		Author author = new Author(title, title, null);
+		Book book = new Book(itemId, itemId, itemId, title, author, null, null, title, title, title);
 		libraryMenu.getItems().add(book);
 
 		System.out.println("Book added successfully");
 	} 
+
+	public void addNewScientificJournal() {
+		Scanner SciIn = new Scanner(System.in);
+		System.out.println("Adding a New Scientific Journal:");
+		System.out.print("Enter publication frequency: ");
+		String publicationFrequency = SciIn.nextLine();
+		System.out.print("Enter impact factor: ");
+		Double impactFactor = SciIn.nextDouble();
+		SciIn.nextLine();
+		System.out.print("Enter item ID: ");
+		int itemId = SciIn.nextInt();
+		SciIn.nextLine(); 
+		System.out.print("Enter title: ");
+		String title = SciIn.nextLine();
+		Author author = new Author(title, title, null);
+		ScientificJournals scientificJournal = new ScientificJournals(itemId, itemId, itemId, title, author, null, null, publicationFrequency, impactFactor);
+		libraryMenu.getItems().add(scientificJournal);
+
+		System.out.println("Scientific Journal added successfully");
+
+	}
+
+	public void addNewMagazine() {
+		Scanner magIn = new Scanner(System.in);
+		System.out.println("Adding a New Magazine:");
+		System.out.print("Enter issue number: ");
+		int issueNumber = magIn.nextInt();
+		magIn.nextLine(); 
+		System.out.print("Enter item ID: ");
+		int itemId = magIn.nextInt();
+		magIn.nextLine(); 
+		System.out.print("Enter title: ");
+		String title = magIn.nextLine();
+		Author author = new Author(title, title, null);
+		Magazines magazine = new Magazines(itemId, itemId, itemId, title, author, null, null, issueNumber);
+		libraryMenu.getItems().add(magazine);
+
+		System.out.println("Magazine added successfully");
+	}
+	public void addNewNewspaper() {
+	    Scanner newsIn = new Scanner(System.in);
+	    System.out.println("Adding a New Newspaper:");
+	    System.out.print("Enter item ID: ");
+	    int itemId = newsIn.nextInt();
+	    newsIn.nextLine();
+	    System.out.print("Enter title: ");
+	    String title = newsIn.nextLine();
+	    System.out.print("Enter author's first name: ");
+	    String authorFirstName = newsIn.nextLine();
+	    System.out.print("Enter author's last name: ");
+	    String authorLastName = newsIn.nextLine();
+	    Author author = new Author(authorFirstName, authorLastName, null);
+	    System.out.print("Enter price: ");
+	    double price = newsIn.nextDouble();
+	    newsIn.nextLine();
+	    System.out.print("Enter publishing date (yyyy-mm-dd): ");
+	    LocalDate publishingDate = LocalDate.parse(newsIn.nextLine());
+	    System.out.print("Enter issue language: ");
+	    String issueLanguage = newsIn.nextLine();
+	    Newspaper newspaper = new Newspaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
+	    libraryMenu.getItems().add(newspaper);
+
+	    System.out.println("Newspaper added successfully");
+	}
+
+
 
 	public static void main(String[] args) {
 		MainMenu menuSystem = new MainMenu();
@@ -80,6 +168,7 @@ public class MainMenu {
 
 			switch (choice) {
 			case 1:
+				addNewItem();
 				break;
 
 			case 2:
