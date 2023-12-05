@@ -6,12 +6,6 @@ import java.time.LocalDate;
 public class ScientificJournals extends Item implements Serializable {
 private String publicationFrequency;
 private Double impactFactor ;
-/**
- *	1. publicationFrequency (String): Represents how often the scientific journal is published (e.g.,
-		monthly, quarterly).
-	2. impactFactor (double): The impact factor of the scientific journal, indicating its average number
-		of citations.
- */
 	public ScientificJournals() {
 		// TODO Auto-generated constructor stub
 	}

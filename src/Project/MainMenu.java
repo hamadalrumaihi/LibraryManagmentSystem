@@ -7,12 +7,13 @@ import java.util.Scanner;
 public class MainMenu {
 	private Application libraryMenu;
 	public MainMenu() {
-		ArrayList<Item> items = new ArrayList<>();
-		ArrayList<Author> authors = new ArrayList<>();
-		ArrayList<Customer> customers = new ArrayList<>();
-		ArrayList<Service> service = new ArrayList<>();
-		this.libraryMenu = new Application(items, authors, customers, service);
+	    ArrayList<Item> items = new ArrayList<>();
+	    ArrayList<Author> authors = new ArrayList<>();
+	    ArrayList<Customer> customers = new ArrayList<>();
+	    ArrayList<Transaction> transactions = Transaction.loadTransactions("Transaction.txt"); // Load existing transactions
+	    this.libraryMenu = new Application(items, authors, customers, transactions);
 	}
+
 
 	public void addNewItem() {
 		Scanner option = new Scanner(System.in);
@@ -147,25 +148,23 @@ public class MainMenu {
 	    System.out.print("Enter the title of the item to update: ");
 	    String searchTitle = itemUpdate.nextLine();
 
-	  
 	    Item foundItem = null;
 	    for (Item item : libraryMenu.getItems()) {
-	        if (item.getTitle().equalsIgnoreCase(searchTitle)) {
+	        if (item.getTitle().toLowerCase().contains(searchTitle.toLowerCase())) {
 	            foundItem = item;
 	            break;
 	        }
 	    }
+
 
 	    if (foundItem == null) {
 	        System.out.println("Item not found.");
 	        return;
 	    }
 
-	    
 	    System.out.println("Found Item:");
 	    System.out.println(foundItem);
 
-	 
 	    System.out.println("Enter new details:");
 
 	    System.out.print("Enter new title: ");
@@ -180,16 +179,9 @@ public class MainMenu {
 	    String newAuthorLastName = itemUpdate.nextLine();
 	    foundItem.getAuthor().setLastName(newAuthorLastName);
 
+	 
 	    System.out.println("Item updated successfully.");
 	}
-
-	
-	
-	
-	
-
-
-
 
 	public static void main(String[] args) {
 		MainMenu menuSystem = new MainMenu();
@@ -224,6 +216,7 @@ public class MainMenu {
 				break;
 
 			case 2:
+				updateExistingItem();
 				break;
 
 			case 3:
@@ -249,12 +242,13 @@ public class MainMenu {
 
 			case 10:
 				break;
-
 			case 11:
-				Transaction.saveTransactions(libraryMenu, "Transaction.txt");
-				System.out.println("Exiting the program.");
-				System.exit(0);
-				break;
+			    Transaction.saveTransactions(libraryMenu.getTransactions(), "Transaction.txt");
+			    System.out.println("Transactions saved successfully.");
+			    System.out.println("Exiting the program.");
+			    System.exit(0);
+			    break;
+
 			default:
 				System.out.println("Invalid option. Please choose a number between 1 and 11.");}
 
