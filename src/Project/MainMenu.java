@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class MainMenu {
 	private Application libraryMenu;
 	public MainMenu() {
-	    ArrayList<Item> items = new ArrayList<>();
-	    ArrayList<Author> authors = new ArrayList<>();
-	    ArrayList<Customer> customers = new ArrayList<>();
-	    ArrayList<Transaction> transactions = Transaction.loadTransactions("Transaction.txt"); // Load existing transactions
-	    this.libraryMenu = new Application(items, authors, customers, transactions);
+		ArrayList<Item> items = new ArrayList<>();
+		ArrayList<Author> authors = new ArrayList<>();
+		ArrayList<Customer> customers = new ArrayList<>();
+		ArrayList<Transaction> transactions = Transaction.loadTransactions("Transaction.txt"); // Load existing transactions
+		this.libraryMenu = new Application(items, authors, customers, transactions);
 	}
 
 
@@ -68,10 +68,19 @@ public class MainMenu {
 		bookIn.nextLine(); 
 
 		System.out.print("Enter title: ");
-		String title = bookIn.nextLine();
-		Author author = new Author(title, title, null);
-		Book book = new Book(itemId, itemId, itemId, title, author, null, null, title, title, title);
+		String bookTitle = bookIn.nextLine();
+
+		System.out.print("Enter author's first name: ");
+		String authorFirstName = bookIn.nextLine();
+
+		System.out.print("Enter author's last name: ");
+		String authorLastName = bookIn.nextLine();
+
+		Author author = new Author(authorFirstName, authorLastName, null);
+		Book book = new Book(itemId, itemId, itemId, bookTitle, author, null, null, bookTitle, bookTitle, bookTitle);
 		libraryMenu.getItems().add(book);
+
+
 
 		System.out.println("Book added successfully");
 	} 
@@ -141,47 +150,169 @@ public class MainMenu {
 	}
 
 	public void updateExistingItem() {
-	    Scanner itemUpdate = new Scanner(System.in);
+		Scanner itemUpdate = new Scanner(System.in);
 
-	    System.out.println("Update Existing Item:");
+		System.out.println("Update Existing Item:");
 
-	    System.out.print("Enter the title of the item to update: ");
-	    String searchTitle = itemUpdate.nextLine();
+		System.out.print("Enter the title of the item to update: ");
+		String searchTitle = itemUpdate.nextLine().trim().toLowerCase();
 
-	    Item foundItem = null;
-	    for (Item item : libraryMenu.getItems()) {
-	        if (item.getTitle().toLowerCase().contains(searchTitle.toLowerCase())) {
-	            foundItem = item;
+		Item foundItem = null;
+		for (Item item : libraryMenu.getItems()) {
+			if (item.getTitle().toLowerCase().equals(searchTitle)) {
+				foundItem = item;
+				break;
+			}
+		}
+
+		if (foundItem == null) {
+			System.out.println("Item not found.");
+			return;
+		}
+
+		System.out.println("Found Item:");
+		System.out.println(foundItem);
+
+		System.out.println("Enter new details:");
+
+		System.out.print("Enter new title: ");
+		String newTitle = itemUpdate.nextLine().trim();
+		foundItem.setTitle(newTitle);
+
+		System.out.print("Enter new author first name: ");
+		String newAuthorFirstName = itemUpdate.nextLine().trim();
+		foundItem.getAuthor().setFirstName(newAuthorFirstName);
+
+		System.out.print("Enter new author last name: ");
+		String newAuthorLastName = itemUpdate.nextLine().trim();
+		foundItem.getAuthor().setLastName(newAuthorLastName);
+
+		System.out.println("Item updated successfully.");
+	}
+
+	public void deleteExistingItem() {
+		Scanner delItem = new Scanner(System.in);
+
+		System.out.println("Delete Existing Item:");
+		System.out.print("Enter the title of the item to delete: ");
+		String searchTitle = delItem.nextLine();
+
+		Item foundItem = null;
+
+
+		for (Item item : libraryMenu.getItems()) {
+			if (item.getTitle().equalsIgnoreCase(searchTitle)) {
+				foundItem = item;
+				break;
+			}
+		}
+
+		if (foundItem == null) {
+			System.out.println("Item not found.");
+			return;
+		}
+
+
+		libraryMenu.getItems().remove(foundItem);
+		System.out.println("Item deleted successfully.");
+	}
+	
+	
+	public void addNewCustomer() {
+	    Scanner customerInput = new Scanner(System.in);
+
+	    System.out.println("Add New Customer:");
+
+	    System.out.print("Enter customer ID: ");
+	    String customerId = customerInput.nextLine().trim();
+
+	 
+	    for (Customer existingCustomer : libraryMenu.getCustomers()) {
+	        if (existingCustomer.getCustomerId().equalsIgnoreCase(customerId)) {
+	            System.out.println("Customer ID already exists. Please choose a different ID.");
+	            return;
+	        }
+	    }
+
+	    System.out.print("Enter first name: ");
+	    String firstName = customerInput.nextLine().trim();
+
+	    System.out.print("Enter last name: ");
+	    String lastName = customerInput.nextLine().trim();
+
+	    System.out.print("Enter address: ");
+	    String address = customerInput.nextLine().trim();
+
+	    System.out.print("Enter phone number: ");
+	    String phoneNumber = customerInput.nextLine().trim();
+
+	    System.out.print("Enter date of birth (yyyy-mm-dd): ");
+	    LocalDate dateOfBirth = LocalDate.parse(customerInput.nextLine());
+
+	    System.out.print("Is the customer a student? (true/false): ");
+	    boolean isStudent = customerInput.nextBoolean();
+
+
+	    Customer newCustomer = new Customer(customerId, firstName, lastName, address, phoneNumber, dateOfBirth, isStudent);
+
+	
+	    libraryMenu.getCustomers().add(newCustomer);
+
+	    System.out.println("New customer added successfully.");
+	}
+
+	public void updateExistingCustomer() {
+	    Scanner customerInput = new Scanner(System.in);
+
+	    System.out.println("Update Existing Customer:");
+	    System.out.print("Enter the Customer ID to update: ");
+	    String searchCustomerId = customerInput.nextLine().trim();
+
+	    Customer foundCustomer = null;
+	    for (Customer customer : libraryMenu.getCustomers()) {
+	        if (customer.getCustomerId().equalsIgnoreCase(searchCustomerId)) {
+	            foundCustomer = customer;
 	            break;
 	        }
 	    }
 
-
-	    if (foundItem == null) {
-	        System.out.println("Item not found.");
+	    if (foundCustomer == null) {
+	        System.out.println("Customer not found.");
 	        return;
 	    }
 
-	    System.out.println("Found Item:");
-	    System.out.println(foundItem);
+	    System.out.println("Found Customer:");
+	    System.out.println(foundCustomer);
 
 	    System.out.println("Enter new details:");
 
-	    System.out.print("Enter new title: ");
-	    String newTitle = itemUpdate.nextLine();
-	    foundItem.setTitle(newTitle);
+	    System.out.print("Enter new first name: ");
+	    String newFirstName = customerInput.nextLine().trim();
+	    foundCustomer.setFirstName(newFirstName);
 
-	    System.out.print("Enter new author first name: ");
-	    String newAuthorFirstName = itemUpdate.nextLine();
-	    foundItem.getAuthor().setFirstName(newAuthorFirstName);
+	    System.out.print("Enter new last name: ");
+	    String newLastName = customerInput.nextLine().trim();
+	    foundCustomer.setLastName(newLastName);
 
-	    System.out.print("Enter new author last name: ");
-	    String newAuthorLastName = itemUpdate.nextLine();
-	    foundItem.getAuthor().setLastName(newAuthorLastName);
+	    System.out.print("Enter new address: ");
+	    String newAddress = customerInput.nextLine().trim();
+	    foundCustomer.setAddress(newAddress);
 
-	 
-	    System.out.println("Item updated successfully.");
+	    System.out.print("Enter new phone number: ");
+	    String newPhoneNumber = customerInput.nextLine().trim();
+	    foundCustomer.setPhoneNumber(newPhoneNumber);
+
+	    System.out.print("Enter new date of birth (yyyy-mm-dd): ");
+	    LocalDate newDateOfBirth = LocalDate.parse(customerInput.nextLine().trim());
+	    foundCustomer.setDateOfBrith(newDateOfBirth);
+
+	    System.out.print("Is the customer a student? (true/false): ");
+	    boolean newIsStudent = customerInput.nextBoolean();
+	    foundCustomer.setStudent(newIsStudent);
+
+	    System.out.println("Customer updated successfully.");
 	}
+
 
 	public static void main(String[] args) {
 		MainMenu menuSystem = new MainMenu();
@@ -189,7 +320,9 @@ public class MainMenu {
 
 
 	}
+
 	private void runMainMenu() {
+		ArrayList<Transaction> transactions = Transaction.loadTransactions("Transaction.txt");
 		Scanner option = new Scanner (System.in);
 		while (true) {
 			System.out.println("Main Menu");
@@ -220,12 +353,15 @@ public class MainMenu {
 				break;
 
 			case 3:
+				deleteExistingItem();
 				break;
 
 			case 4:
+				addNewCustomer();
 				break;
 
 			case 5:
+				updateExistingCustomer();
 				break;
 
 			case 6:
@@ -243,11 +379,16 @@ public class MainMenu {
 			case 10:
 				break;
 			case 11:
-			    Transaction.saveTransactions(libraryMenu.getTransactions(), "Transaction.txt");
-			    System.out.println("Transactions saved successfully.");
-			    System.out.println("Exiting the program.");
-			    System.exit(0);
-			    break;
+				Transaction.saveTransactions(libraryMenu.getTransactions(), "Transaction.txt");
+				System.out.println("Transactions saved successfully.");
+				System.out.println("Exiting the program.");
+				System.exit(0);
+				// Assuming you have an Application instance named libraryMenu
+				Transaction newTransaction = new Transaction(null, null, null, null, null, null);
+				libraryMenu.getTransactions().add(newTransaction);
+				Transaction.saveTransactions(libraryMenu.getTransactions(), "Transaction.txt");
+
+				break;
 
 			default:
 				System.out.println("Invalid option. Please choose a number between 1 and 11.");}

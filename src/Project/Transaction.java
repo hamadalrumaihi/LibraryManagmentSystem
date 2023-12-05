@@ -1,6 +1,7 @@
 package Project;
 
 import java.time.LocalDate;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -83,29 +84,27 @@ public class Transaction implements Serializable {
 	}
 
 	public static void saveTransactions(ArrayList<Transaction> transactions, String txtFile) {
-		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(txtFile))) {
-			outputStream.writeObject(transactions);
-			System.out.println("Transactions saved successfully.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(txtFile))) {
+	        outputStream.writeObject(transactions);
+	        System.out.println("Transactions saved successfully.");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	public static ArrayList<Transaction> loadTransactions(String txtfile) {
-		ArrayList<Transaction> transactions = new ArrayList<>();
-		try (ObjectInputStream transInObj = new ObjectInputStream(new FileInputStream(txtfile))) {
-			Object obj = transInObj.readObject();
-			if (obj instanceof ArrayList) {
-				transactions = (ArrayList<Transaction>) obj;
-				System.out.println("Transactions loaded successfully.");
-			}
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return transactions;
-
+	    ArrayList<Transaction> transactions = new ArrayList<>();
+	    try (ObjectInputStream transInObj = new ObjectInputStream(new FileInputStream(txtfile))) {
+	        Object obj = transInObj.readObject();
+	        if (obj instanceof ArrayList) {
+	            transactions = (ArrayList<Transaction>) obj;
+	            System.out.println("Transactions loaded successfully.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return transactions;
 	}
-
 	@Override
 	public String toString() {
 		return "Transaction [transactionId=" + transactionId + ", customer=" + customer + ", item=" + item
