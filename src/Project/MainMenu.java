@@ -38,12 +38,12 @@ public class MainMenu {
 		case 3:
 			addNewMagazine();
 			break;
-
+		
 		case 4:
 			addNewNewspaper();
 			break;
-
-
+			
+			
 		}
 	}
 	public void addNewBook() {
@@ -114,32 +114,30 @@ public class MainMenu {
 		System.out.println("Magazine added successfully");
 	}
 	public void addNewNewspaper() {
-		Scanner newsIn = new Scanner(System.in);
-		System.out.println("Adding a New Newspaper:");
-		System.out.print("Enter item ID: ");
-		int itemId = newsIn.nextInt();
-		newsIn.nextLine();
-		System.out.print("Enter title: ");
-		String title = newsIn.nextLine();
-		System.out.print("Enter author's first name: ");
-		String authorFirstName = newsIn.nextLine();
-		System.out.print("Enter author's last name: ");
-		String authorLastName = newsIn.nextLine();
-		Author author = new Author(authorFirstName, authorLastName, null);
-		System.out.print("Enter price: ");
-		double price = newsIn.nextDouble();
-		newsIn.nextLine();
-		System.out.print("Enter publishing date (yyyy-mm-dd): ");
-		LocalDate publishingDate = LocalDate.parse(newsIn.nextLine());
-		System.out.print("Enter issue language: ");
-		String issueLanguage = newsIn.nextLine();
-		Newspaper newspaper = new Newspaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
-		libraryMenu.getItems().add(newspaper);
+	    Scanner newsIn = new Scanner(System.in);
+	    System.out.println("Adding a New Newspaper:");
+	    System.out.print("Enter item ID: ");
+	    int itemId = newsIn.nextInt();
+	    newsIn.nextLine();
+	    System.out.print("Enter title: ");
+	    String title = newsIn.nextLine();
+	    System.out.print("Enter author's first name: ");
+	    String authorFirstName = newsIn.nextLine();
+	    System.out.print("Enter author's last name: ");
+	    String authorLastName = newsIn.nextLine();
+	    Author author = new Author(authorFirstName, authorLastName, null);
+	    System.out.print("Enter price: ");
+	    double price = newsIn.nextDouble();
+	    newsIn.nextLine();
+	    System.out.print("Enter publishing date (yyyy-mm-dd): ");
+	    LocalDate publishingDate = LocalDate.parse(newsIn.nextLine());
+	    System.out.print("Enter issue language: ");
+	    String issueLanguage = newsIn.nextLine();
+	    Newspaper newspaper = new Newspaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
+	    libraryMenu.getItems().add(newspaper);
 
-		System.out.println("Newspaper added successfully");
+	    System.out.println("Newspaper added successfully");
 	}
-
-
 
 
 
@@ -155,15 +153,14 @@ public class MainMenu {
 			System.out.println("Main Menu");
 			System.out.println("Choose one of the next bullets: ");
 			System.out.println("1-  Add New Item");
-			System.out.println("2-  Update Existing Item");
-			System.out.println("3-  Delete Existing Item");
-			System.out.println("4-  Add new Customer");
-			System.out.println("5-  Delete Existing Customer");
+			System.out.println("2-  Delete Existing Item");
+			System.out.println("3-  Add new Customer");
+			System.out.println("4-  Delete Existing Customer");
+			System.out.println("5-  Borrow Transaction.");
 			System.out.println("6-  Borrow Transaction.");
-			System.out.println("7-  Borrow Transaction.");
-			System.out.println("8-  List of Items Not Yet Returned.");
-			System.out.println("9-  List All Author Publications.");
-			System.out.println("10-  Save and Exit");
+			System.out.println("7-  List of Items Not Yet Returned.");
+			System.out.println("8-  List All Author Publications.");
+			System.out.println("9-  Save and Exit");
 
 			System.out.print("Choose an option (1-9): ");
 			int choice = option.nextInt();
@@ -175,8 +172,6 @@ public class MainMenu {
 				break;
 
 			case 2:
-
-
 				break;
 
 			case 3:
@@ -199,9 +194,7 @@ public class MainMenu {
 
 			case 9:
 				break;
-
-			case 10:
-				break;}
+			}
 
 
 
