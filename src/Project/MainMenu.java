@@ -134,7 +134,7 @@ public class MainMenu {
 		LocalDate publishingDate = LocalDate.parse(newsIn.nextLine());
 		System.out.print("Enter issue language: ");
 		String issueLanguage = newsIn.nextLine();
-		Newspaper newspaper = new Newspaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
+		NewsPaper newspaper = new NewsPaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
 		libraryMenu.getItems().add(newspaper);
 
 		System.out.println("Newspaper added successfully");

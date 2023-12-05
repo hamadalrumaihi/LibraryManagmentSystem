@@ -3,10 +3,10 @@ package Project;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Newspaper extends Item implements Serializable{
+public class NewsPaper extends Item implements Serializable{
     private String issueLanguage;
 
-    public Newspaper(int id, int pages, int dueDays, String title, Author author, Double price,
+    public NewsPaper(int id, int pages, int dueDays, String title, Author author, Double price,
                      LocalDate publishingDate, String issueLanguage) {
         super(id, pages, dueDays, title, author, price, publishingDate);
         this.issueLanguage = issueLanguage;
