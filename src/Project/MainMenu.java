@@ -165,7 +165,7 @@ public class MainMenu {
 			System.out.println("9-  List All Author Publications.");
 			System.out.println("10-  Save and Exit");
 
-			System.out.print("Choose an option (1-9): ");
+			System.out.print("Choose an option (1-10): ");
 			int choice = option.nextInt();
 			option.nextLine();
 
