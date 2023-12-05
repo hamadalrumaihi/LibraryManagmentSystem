@@ -38,12 +38,12 @@ public class MainMenu {
 		case 3:
 			addNewMagazine();
 			break;
-		
+
 		case 4:
 			addNewNewspaper();
 			break;
-			
-			
+
+
 		}
 	}
 	public void addNewBook() {
@@ -114,30 +114,80 @@ public class MainMenu {
 		System.out.println("Magazine added successfully");
 	}
 	public void addNewNewspaper() {
-	    Scanner newsIn = new Scanner(System.in);
-	    System.out.println("Adding a New Newspaper:");
-	    System.out.print("Enter item ID: ");
-	    int itemId = newsIn.nextInt();
-	    newsIn.nextLine();
-	    System.out.print("Enter title: ");
-	    String title = newsIn.nextLine();
-	    System.out.print("Enter author's first name: ");
-	    String authorFirstName = newsIn.nextLine();
-	    System.out.print("Enter author's last name: ");
-	    String authorLastName = newsIn.nextLine();
-	    Author author = new Author(authorFirstName, authorLastName, null);
-	    System.out.print("Enter price: ");
-	    double price = newsIn.nextDouble();
-	    newsIn.nextLine();
-	    System.out.print("Enter publishing date (yyyy-mm-dd): ");
-	    LocalDate publishingDate = LocalDate.parse(newsIn.nextLine());
-	    System.out.print("Enter issue language: ");
-	    String issueLanguage = newsIn.nextLine();
-	    Newspaper newspaper = new Newspaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
-	    libraryMenu.getItems().add(newspaper);
+		Scanner newsIn = new Scanner(System.in);
+		System.out.println("Adding a New Newspaper:");
+		System.out.print("Enter item ID: ");
+		int itemId = newsIn.nextInt();
+		newsIn.nextLine();
+		System.out.print("Enter title: ");
+		String title = newsIn.nextLine();
+		System.out.print("Enter author's first name: ");
+		String authorFirstName = newsIn.nextLine();
+		System.out.print("Enter author's last name: ");
+		String authorLastName = newsIn.nextLine();
+		Author author = new Author(authorFirstName, authorLastName, null);
+		System.out.print("Enter price: ");
+		double price = newsIn.nextDouble();
+		newsIn.nextLine();
+		System.out.print("Enter publishing date (yyyy-mm-dd): ");
+		LocalDate publishingDate = LocalDate.parse(newsIn.nextLine());
+		System.out.print("Enter issue language: ");
+		String issueLanguage = newsIn.nextLine();
+		Newspaper newspaper = new Newspaper(itemId, 0, 0, title, author, price, publishingDate, issueLanguage);
+		libraryMenu.getItems().add(newspaper);
 
-	    System.out.println("Newspaper added successfully");
+		System.out.println("Newspaper added successfully");
 	}
+
+	public void updateExistingItem() {
+	    Scanner itemUpdate = new Scanner(System.in);
+
+	    System.out.println("Update Existing Item:");
+
+	    System.out.print("Enter the title of the item to update: ");
+	    String searchTitle = itemUpdate.nextLine();
+
+	  
+	    Item foundItem = null;
+	    for (Item item : libraryMenu.getItems()) {
+	        if (item.getTitle().equalsIgnoreCase(searchTitle)) {
+	            foundItem = item;
+	            break;
+	        }
+	    }
+
+	    if (foundItem == null) {
+	        System.out.println("Item not found.");
+	        return;
+	    }
+
+	    
+	    System.out.println("Found Item:");
+	    System.out.println(foundItem);
+
+	 
+	    System.out.println("Enter new details:");
+
+	    System.out.print("Enter new title: ");
+	    String newTitle = itemUpdate.nextLine();
+	    foundItem.setTitle(newTitle);
+
+	    System.out.print("Enter new author first name: ");
+	    String newAuthorFirstName = itemUpdate.nextLine();
+	    foundItem.getAuthor().setFirstName(newAuthorFirstName);
+
+	    System.out.print("Enter new author last name: ");
+	    String newAuthorLastName = itemUpdate.nextLine();
+	    foundItem.getAuthor().setLastName(newAuthorLastName);
+
+	    System.out.println("Item updated successfully.");
+	}
+
+	
+	
+	
+	
+
 
 
 
@@ -153,16 +203,18 @@ public class MainMenu {
 			System.out.println("Main Menu");
 			System.out.println("Choose one of the next bullets: ");
 			System.out.println("1-  Add New Item");
-			System.out.println("2-  Delete Existing Item");
-			System.out.println("3-  Add new Customer");
-			System.out.println("4-  Delete Existing Customer");
-			System.out.println("5-  Borrow Transaction.");
-			System.out.println("6-  Borrow Transaction.");
-			System.out.println("7-  List of Items Not Yet Returned.");
-			System.out.println("8-  List All Author Publications.");
-			System.out.println("9-  Save and Exit");
+			System.out.println("2-  Update Item");
+			System.out.println("3-  Delete Existing Item");
+			System.out.println("4-  Add new Customer");
+			System.out.println("5-  Update Customer");
+			System.out.println("6-  Delete Existing Customer");
+			System.out.println("7-  Borrow Transaction.");
+			System.out.println("8-  Return Transaction.");
+			System.out.println("9-  List of Items Not Yet Returned.");
+			System.out.println("10-  List All Author Publications.");
+			System.out.println("11-  Save and Exit");
 
-			System.out.print("Choose an option (1-9): ");
+			System.out.print("Choose an option (1-11): ");
 			int choice = option.nextInt();
 			option.nextLine();
 
@@ -194,7 +246,17 @@ public class MainMenu {
 
 			case 9:
 				break;
-			}
+
+			case 10:
+				break;
+
+			case 11:
+				Transaction.saveTransactions(libraryMenu, "Transaction.txt");
+				System.out.println("Exiting the program.");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid option. Please choose a number between 1 and 11.");}
 
 
 

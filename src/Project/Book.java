@@ -1,8 +1,9 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Book extends Item {
+public class Book extends Item implements Serializable {
 private String ISBN,genre,description;
 private Author author;
 

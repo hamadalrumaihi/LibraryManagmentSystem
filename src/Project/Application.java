@@ -1,8 +1,9 @@
 package Project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Application {
+public class Application implements Serializable {
 ArrayList<Item>items=new ArrayList<Item>();
 ArrayList<Author>authors=new ArrayList<Author>();
 ArrayList<Customer>customers=new ArrayList<Customer>();

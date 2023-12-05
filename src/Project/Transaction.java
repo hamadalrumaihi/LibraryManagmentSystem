@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Transaction implements Serializable{
@@ -77,13 +78,13 @@ public void Return() {
 }
 
 
-public static void saveTransactions(ArrayList<Transaction> transactions, String txtfile) {
-	try (ObjectOutputStream transOutObj = new ObjectOutputStream(new FileOutputStream(txtfile))) {
-		transOutObj.writeObject(transactions);
-		System.out.println("Transactions saved successfully.");
-	} catch (Exception e) {
-		e.getMessage();
-	}
+public static void saveTransactions(Application application, String txtFile) {
+    try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(txtFile))) {
+        outputStream.writeObject(application);
+        System.out.println("Transactions saved successfully.");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 }
 public static ArrayList<Transaction> loadTransactions(String txtfile) {
 	ArrayList<Transaction> transactions = new ArrayList<>();
@@ -97,5 +98,7 @@ public static ArrayList<Transaction> loadTransactions(String txtfile) {
 		e.getMessage();
 	}
 	return transactions;
-}}
+}
+
+}
 

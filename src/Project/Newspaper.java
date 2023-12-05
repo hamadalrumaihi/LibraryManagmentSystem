@@ -1,8 +1,9 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Newspaper extends Item {
+public class Newspaper extends Item implements Serializable{
     private String issueLanguage;
 
     public Newspaper(int id, int pages, int dueDays, String title, Author author, Double price,

@@ -1,8 +1,9 @@
 package Project;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ScientificJournals extends Item {
+public class ScientificJournals extends Item implements Serializable {
 private String publicationFrequency;
 private Double impactFactor ;
 /**
