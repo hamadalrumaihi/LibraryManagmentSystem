@@ -10,7 +10,7 @@ public class MainMenu {
 		ArrayList<Item> items = new ArrayList<>();
 		ArrayList<Author> authors = new ArrayList<>();
 		ArrayList<Customer> customers = new ArrayList<>();
-		ArrayList<Transaction> transactions = Transaction.loadTransactions("Transaction.txt"); // Load existing transactions
+		ArrayList<Transaction> transactions = Transaction.loadTransactions("Transaction.txt");
 		this.libraryMenu = new Application(items, authors, customers, transactions);
 	}
 
@@ -49,33 +49,23 @@ public class MainMenu {
 	}
 	public void addNewBook() {
 		Scanner bookIn = new Scanner(System.in);
-
 		System.out.println("Adding a New Book:");
-
-
 		System.out.print("Enter ISBN: ");
 		String isbn = bookIn.nextLine();
-
 		System.out.print("Enter genre: ");
 		String genre = bookIn.nextLine();
-
 		System.out.print("Enter description: ");
 		String description = bookIn.nextLine();
-
-
 		System.out.print("Enter item ID: ");
 		int itemId = bookIn.nextInt();
 		bookIn.nextLine(); 
-
 		System.out.print("Enter title: ");
 		String bookTitle = bookIn.nextLine();
-
 		System.out.print("Enter author's first name: ");
 		String authorFirstName = bookIn.nextLine();
-
 		System.out.print("Enter author's last name: ");
 		String authorLastName = bookIn.nextLine();
-
+		
 		Author author = new Author(authorFirstName, authorLastName, null);
 		Book book = new Book(itemId, itemId, itemId, bookTitle, author, null, null, bookTitle, bookTitle, bookTitle);
 		libraryMenu.getItems().add(book);
@@ -86,43 +76,52 @@ public class MainMenu {
 	} 
 
 	public void addNewScientificJournal() {
-		Scanner SciIn = new Scanner(System.in);
-		System.out.println("Adding a New Scientific Journal:");
-		System.out.print("Enter publication frequency: ");
-		String publicationFrequency = SciIn.nextLine();
-		System.out.print("Enter impact factor: ");
-		Double impactFactor = SciIn.nextDouble();
-		SciIn.nextLine();
-		System.out.print("Enter item ID: ");
-		int itemId = SciIn.nextInt();
-		SciIn.nextLine(); 
-		System.out.print("Enter title: ");
-		String title = SciIn.nextLine();
-		Author author = new Author(title, title, null);
-		ScientificJournals scientificJournal = new ScientificJournals(itemId, itemId, itemId, title, author, null, null, publicationFrequency, impactFactor);
-		libraryMenu.getItems().add(scientificJournal);
+	    Scanner SciIn = new Scanner(System.in);
+	    System.out.println("Adding a New Scientific Journal:");
+	    System.out.print("Enter publication frequency: ");
+	    String publicationFrequency = SciIn.nextLine();
+	    System.out.print("Enter impact factor: ");
+	    Double impactFactor = SciIn.nextDouble();
+	    SciIn.nextLine();
+	    System.out.print("Enter item ID: ");
+	    int itemId = SciIn.nextInt();
+	    SciIn.nextLine();
+	    System.out.print("Enter title: ");
+	    String title = SciIn.nextLine();
+	    System.out.print("Enter author's first name: ");
+	    String authorFirstName = SciIn.nextLine();
+	    System.out.print("Enter author's last name: ");
+	    String authorLastName = SciIn.nextLine();
+	    Author author = new Author(authorFirstName, authorLastName, null);
+	    ScientificJournals scientificJournal = new ScientificJournals(itemId, itemId, itemId, title, author, null, null, publicationFrequency, impactFactor);
+	    libraryMenu.getItems().add(scientificJournal);
 
-		System.out.println("Scientific Journal added successfully");
-
+	    System.out.println("Scientific Journal added successfully");
 	}
+
 
 	public void addNewMagazine() {
-		Scanner magIn = new Scanner(System.in);
-		System.out.println("Adding a New Magazine:");
-		System.out.print("Enter issue number: ");
-		int issueNumber = magIn.nextInt();
-		magIn.nextLine(); 
-		System.out.print("Enter item ID: ");
-		int itemId = magIn.nextInt();
-		magIn.nextLine(); 
-		System.out.print("Enter title: ");
-		String title = magIn.nextLine();
-		Author author = new Author(title, title, null);
-		Magazines magazine = new Magazines(itemId, itemId, itemId, title, author, null, null, issueNumber);
-		libraryMenu.getItems().add(magazine);
+	    Scanner magIn = new Scanner(System.in);
+	    System.out.println("Adding a New Magazine:");
+	    System.out.print("Enter issue number: ");
+	    int issueNumber = magIn.nextInt();
+	    magIn.nextLine();
+	    System.out.print("Enter item ID: ");
+	    int itemId = magIn.nextInt();
+	    magIn.nextLine();
+	    System.out.print("Enter title: ");
+	    String title = magIn.nextLine();
+	    System.out.print("Enter author's first name: ");
+	    String authorFirstName = magIn.nextLine();
+	    System.out.print("Enter author's last name: ");
+	    String authorLastName = magIn.nextLine();
+	    Author author = new Author(authorFirstName, authorLastName, null);
+	    Magazines magazine = new Magazines(itemId, itemId, itemId, title, author, null, null, issueNumber);
+	    libraryMenu.getItems().add(magazine);
 
-		System.out.println("Magazine added successfully");
+	    System.out.println("Magazine added successfully");
 	}
+
 	public void addNewNewspaper() {
 		Scanner newsIn = new Scanner(System.in);
 		System.out.println("Adding a New Newspaper:");
@@ -383,7 +382,7 @@ public class MainMenu {
 				System.out.println("Transactions saved successfully.");
 				System.out.println("Exiting the program.");
 				System.exit(0);
-				// Assuming you have an Application instance named libraryMenu
+				//PLEASE FIX THE SAVING METHOD
 				Transaction newTransaction = new Transaction(null, null, null, null, null, null);
 				libraryMenu.getTransactions().add(newTransaction);
 				Transaction.saveTransactions(libraryMenu.getTransactions(), "Transaction.txt");

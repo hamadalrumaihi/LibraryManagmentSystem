@@ -3,21 +3,21 @@ package Project;
 import java.time.LocalDate;
 
 public class Item {
-private int Id,pages,dueDays;
-private String title;
-private Author author;
-private Double Price;
-private LocalDate publishingDate;
+	private int Id,pages,dueDays;
+	private String title;
+	private Author author;
+	private Double Price;
+	private LocalDate publishingDate;
 	public Item(int id, int pages, int dueDays, String title, Author author, Double price, LocalDate publishingDate) {
-	super();
-	Id = id;
-	this.pages = pages;
-	this.dueDays = dueDays;
-	this.title = title;
-	this.author = author;
-	Price = price;
-	this.publishingDate = publishingDate;
-}
+		super();
+		Id = id;
+		this.pages = pages;
+		this.dueDays = dueDays;
+		this.title = title;
+		this.author = author;
+		Price = price;
+		this.publishingDate = publishingDate;
+	}
 	public Item() {
 		// TODO Auto-generated constructor stub
 	}
